@@ -1,0 +1,47 @@
+<div class="order-summary-container">
+  <h2>Order Summary</h2>
+
+  <div *ngIf="orderSummary; else noOrder" class="order-summary">
+    <div class="order-items">
+      <div class="order-item" *ngFor="let item of orderSummary.items">
+        <!-- Product Details -->
+        <div class="item-details">
+          <div class="item-info">
+            <span class="item-name">{{ item.name }}</span>
+            <span class="item-quantity">x{{ item.quantity }}</span>
+          </div>
+          <div class="item-price-details">
+            <!-- Move original price above total price -->
+            <span class="item-original-price">
+              Original: {{ item.price | currency }}
+            </span>
+            <span class="item-total-price">
+              Price: {{ item.price * item.quantity | currency }}
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Order Total -->
+    <div class="order-total">
+      <strong>Total:</strong>
+      <span>{{ orderSummary.totalAmount | currency }}</span>
+    </div>
+
+    <!-- Payment Method -->
+    <div class="payment-method">
+      <p>Payment Method: {{ orderSummary.paymentMethod }}</p>
+    </div>
+  </div>
+
+  <!-- No Order Template -->
+  <ng-template #noOrder>
+    <p>No orders found. Please add items to the cart and place an order.</p>
+  </ng-template>
+</div>
+
+<!-- Back to Product List Button - Outside of the container -->
+<div class="back-button-container">
+  <button class="back-button" (click)="goToProductList()">Back to Product List</button>
+</div>

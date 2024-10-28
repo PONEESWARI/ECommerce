@@ -1,0 +1,102 @@
+<div class="container">
+  <h1>Checkout</h1>
+
+  <!-- Back Button -->
+  <button mat-button color="accent" (click)="goBack()">
+    &#8592; Back to Cart
+  </button>
+
+  <div *ngIf="cartItems.length > 0; else emptyCart">
+    <h3>Review Your Order</h3>
+    <table mat-table [dataSource]="cartItems" class="mat-elevation-z8">
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef>Product Name</th>
+        <td mat-cell *matCellDef="let item">{{ item.name }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="quantity">
+        <th mat-header-cell *matHeaderCellDef>Quantity</th>
+        <td mat-cell *matCellDef="let item">{{ item.quantity }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="price">
+        <th mat-header-cell *matHeaderCellDef>Price</th>
+        <td mat-cell *matCellDef="let item">{{ item.price | currency }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="total">
+        <th mat-header-cell *matHeaderCellDef>Total</th>
+        <td mat-cell *matCellDef="let item">
+          {{ item.quantity * item.price | currency }}
+        </td>
+      </ng-container>
+
+      <tr
+        mat-header-row
+        *matHeaderRowDef="['name', 'quantity', 'price', 'total']"
+      ></tr>
+      <tr
+        mat-row
+        *matRowDef="let row; columns: ['name', 'quantity', 'price', 'total']"
+      ></tr>
+    </table>
+<br>
+    <!-- Display Total Amount for Shipping Information -->
+    <div class="total-amount-section">
+      <h4>Total Price: {{ getTotalAmount() | currency }}</h4>
+    </div>
+
+    <h2>Shipping Information</h2>
+    <form [formGroup]="checkoutForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <mat-form-field appearance="fill">
+          <mat-label>Full Name</mat-label>
+          <input matInput formControlName="fullName" required />
+        </mat-form-field>
+      </div>
+      <div class="form-group">
+        <mat-form-field appearance="fill">
+          <mat-label>Address</mat-label>
+          <textarea matInput formControlName="address" required></textarea>
+        </mat-form-field>
+      </div>
+      <div class="form-group">
+        <mat-form-field appearance="fill">
+          <mat-label>City</mat-label>
+          <input matInput formControlName="city" required />
+        </mat-form-field>
+      </div>
+      <div class="form-group">
+        <mat-form-field appearance="fill">
+          <mat-label>Postal Code</mat-label>
+          <input matInput formControlName="postalCode" required />
+        </mat-form-field>
+      </div>
+
+
+     <!-- Payment Method Selection -->
+     <h3>Payment Method</h3>
+     <mat-radio-group formControlName="paymentMethod">
+       <mat-radio-button value="cash">Cash</mat-radio-button>
+       <mat-radio-button value="online">Online</mat-radio-button>
+     </mat-radio-group>
+     
+
+      <button
+        type="submit"
+        mat-raised-button
+        color="primary"
+        [disabled]="checkoutForm.invalid"
+      >
+        Place Order
+      </button>
+    </form>
+  </div>
+
+  <ng-template #emptyCart>
+    <p>
+      Your cart is empty. Please add items to your cart before proceeding to
+      checkout.
+    </p>
+  </ng-template>
+</div>

@@ -1,0 +1,24 @@
+<div class="user-list-container">
+  <h2>User List</h2>
+
+  <!-- Display error message if it exists -->
+  <div *ngIf="errorMessage" class="error-message">
+    {{ errorMessage }}
+  </div>
+
+  <!-- Display users if they exist -->
+  <ul *ngIf="users.length > 0; else noUsers" class="user-list">
+    <li *ngFor="let user of users" class="user-item">
+      <div class="user-info">
+        <h3>{{ user.firstName }} {{ user.lastName }}</h3>
+        <p><strong>Email:</strong> {{ user.email }}</p>
+        <p><strong>Mobile:</strong> {{ user.mobile }}</p>
+        <p><strong>Role:</strong> {{ user.role }}</p>
+      </div>
+    </li>
+  </ul>
+
+  <ng-template #noUsers>
+    <p class="no-users">No users found.</p>
+  </ng-template>
+</div>

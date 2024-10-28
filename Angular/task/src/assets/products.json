@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "name": "Product 1",
+    "description": "Description of Product 1",
+    "image": "product1.jpg",
+    "originalPrice": 100,
+    "discountPrice": 80,
+    "sellingPrice": 90,
+    "quantity": 50,
+    "uom": "pcs",
+    "hsnCode": "123456"
+  },
+  {
+    "id": 2,
+    "name": "Product 2",
+    "description": "Description of Product 2",
+    "image": "product2.jpg",
+    "originalPrice": 150,
+    "discountPrice": 120,
+    "sellingPrice": 130,
+    "quantity": 30,
+    "uom": "pcs",
+    "hsnCode": "654321"
+  }
+]

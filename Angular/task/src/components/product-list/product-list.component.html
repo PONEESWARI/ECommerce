@@ -1,0 +1,116 @@
+<div class="container">
+  <h1 class="my-4">Product List</h1>
+
+  <!-- Toggle View Button -->
+  <button (click)="toggleView()" mat-raised-button class="grid-view-button" >
+    {{ isGridView ? "Switch to List View" : "Switch to Grid View" }}
+  </button>
+
+      <!-- Orders Button -->
+      <button (click)="goToOrders()" mat-raised-button class="view-orders-button">
+        View Orders
+      </button>
+      
+  <!-- Grid View -->
+  <div *ngIf="isGridView; else listView">
+    <mat-grid-list cols="3" rowHeight="350px">
+      <mat-grid-tile *ngFor="let product of products">
+        <mat-card>
+          <mat-card-header>
+            <mat-card-title>{{ product.name }}</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <img [src]="product.image" alt="{{ product.name }}" style="width: 100%; height: auto;" />
+            <p>{{ product.description }}</p>
+            <p>Original Price: {{ product.originalPrice | currency }}</p>
+            <p>Discount Price: {{ product.discountPrice | currency }}</p>
+            <p>Selling Price: {{ product.sellingPrice | currency }}</p>
+            <!-- <p>Quantity: {{ product.quantity }} {{ product.uom }}</p> -->
+            <p>HSN Code: {{ product.hsnCode }}</p>
+          </mat-card-content>
+          <mat-card-actions>
+            <button (click)="addToCart(product)" mat-button color="primary">
+              Add to Cart
+            </button>
+          </mat-card-actions>
+        </mat-card>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </div>
+
+  <!-- List View -->
+  <ng-template #listView>
+    <table mat-table [dataSource]="products" class="mat-elevation-z8" style="width: 100%">
+      
+      <!-- Product Name Column -->
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef> Product Name </th>
+        <td mat-cell *matCellDef="let product"> {{ product.name }} </td>
+      </ng-container>
+
+      <!-- Image Column -->
+      <ng-container matColumnDef="image">
+        <th mat-header-cell *matHeaderCellDef> Image </th>
+        <td mat-cell *matCellDef="let product">
+          <img [src]="product.image" alt="{{ product.name }}" class="image" style="width: 50px; height: auto;" />
+        </td>
+      </ng-container>
+
+      <!-- Description Column -->
+      <ng-container matColumnDef="description">
+        <th mat-header-cell *matHeaderCellDef> Description </th>
+        <td mat-cell *matCellDef="let product"> {{ product.description }} </td>
+      </ng-container>
+
+      <!-- Original Price Column -->
+      <ng-container matColumnDef="originalPrice">
+        <th mat-header-cell *matHeaderCellDef> Original Price </th>
+        <td mat-cell *matCellDef="let product"> {{ product.originalPrice | currency }} </td>
+      </ng-container>
+
+      <!-- Discount Price Column -->
+      <ng-container matColumnDef="discountPrice">
+        <th mat-header-cell *matHeaderCellDef> Discount Price </th>
+        <td mat-cell *matCellDef="let product"> {{ product.discountPrice | currency }} </td>
+      </ng-container>
+
+      <!-- Selling Price Column -->
+      <ng-container matColumnDef="sellingPrice">
+        <th mat-header-cell *matHeaderCellDef> Selling Price </th>
+        <td mat-cell *matCellDef="let product"> {{ product.sellingPrice | currency }} </td>
+      </ng-container>
+
+      <!-- Quantity Column -->
+      <ng-container matColumnDef="quantity">
+        <th mat-header-cell *matHeaderCellDef> Quantity </th>
+        <td mat-cell *matCellDef="let product"> {{ product.quantity }} {{ product.uom }} </td>
+      </ng-container>
+
+      <!-- HSN Code Column -->
+      <ng-container matColumnDef="hsnCode">
+        <th mat-header-cell *matHeaderCellDef> HSN Code </th>
+        <td mat-cell *matCellDef="let product"> {{ product.hsnCode }} </td>
+      </ng-container>
+
+      <!-- Actions Column -->
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef> Actions </th>
+        <td mat-cell *matCellDef="let product">
+          <button (click)="addToCart(product)" mat-raised-button color="primary">
+            Add to Cart
+          </button>
+        </td>
+      </ng-container>
+
+      <!-- Header Row -->
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <!-- Data Row -->
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+  </ng-template>
+
+  <!-- Proceed to Checkout Button -->
+  <button (click)="goToCheckout()" class="btn btn-success mt-4">
+    Proceed to Checkout
+  </button>
+</div>

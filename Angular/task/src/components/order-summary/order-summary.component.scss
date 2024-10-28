@@ -1,0 +1,96 @@
+.order-summary-container {
+  max-width: 800px; /* Limit the maximum width */
+  margin: 20px auto; /* Center the container */
+  padding: 20px; /* Add padding around the content */
+  border-radius: 8px; /* Rounded corners */
+  background-color: #f0f8ff; /* Light background color */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2); /* Slight shadow */
+}
+
+.order-summary h2 {
+  text-align: center; /* Center the heading */
+  color: #4a4a4a; /* Dark color for the heading */
+  margin-bottom: 20px; /* Spacing below the heading */
+  font-size: 28px; /* Larger font size */
+  font-family: 'Arial', sans-serif; /* Change font family */
+  background: linear-gradient(90deg, #ff6f61, #de5d83); /* Gradient background */
+  -webkit-background-clip: text; /* Text gradient */
+  -webkit-text-fill-color: transparent; /* Text fill */
+}
+
+.order-items {
+  display: flex;
+  flex-direction: column; /* Arrange items vertically */
+  gap: 15px; /* Spacing between items */
+}
+
+.order-item {
+  display: flex; /* Flexbox for alignment */
+  justify-content: space-between; /* Space between item info and price */
+  border: 1px solid #ddd; /* Border around each item */
+  border-radius: 5px; /* Rounded corners */
+  padding: 15px; /* Padding inside the item */
+  background-color: #fffbcc; /* Light yellow background for items */
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1); /* Shadow for items */
+}
+
+.item-details {
+  flex: 1; /* Allow details to take up remaining space */
+}
+
+.item-info {
+  margin-bottom: 10px; /* Spacing below item info */
+}
+
+.item-name {
+  font-weight: bold; /* Bold for item name */
+  font-size: 18px; /* Size of item name */
+  color: #333; /* Dark color for item name */
+}
+
+.item-original-price {
+  color: #888;
+  margin-bottom: 5px;
+  justify-content: space-between;/* Grey color for original price */
+  /* Remove the line-through effect */
+}
+
+.item-price-details {
+  display: flex; /* Flex for price details */
+  justify-content: space-between; /* Space between quantity and price */
+  margin-top: 5px; /* Spacing above price details */
+}
+
+.order-total {
+  font-size: 22px; /* Larger font for total */
+  font-weight: bold; /* Bold for emphasis */
+  margin-top: 20px; /* Spacing above total */
+  text-align: right; /* Align total to the right */
+  color: #2c3e50; /* Darker color for total */
+}
+
+.payment-method {
+  margin-top: 10px; /* Spacing above payment method */
+  font-style: italic; /* Italic for payment method */
+  color: #7f8c8d; /* Slightly lighter color */
+}
+
+.back-button-container {
+  text-align: center; /* Center the button */
+  margin-top: 20px; /* Spacing above button */
+}
+
+.back-button {
+  background-color: #27ae60; /* Green background for button */
+  color: white; /* Text color */
+  border: none; /* Remove border */
+  padding: 10px 20px; /* Padding for the button */
+  border-radius: 5px; /* Rounded corners for button */
+  cursor: pointer; /* Pointer on hover */
+  font-size: 16px; /* Font size */
+  transition: background-color 0.3s; /* Smooth transition */
+}
+
+.back-button:hover {
+  background-color: #219150; /* Darker green on hover */
+}

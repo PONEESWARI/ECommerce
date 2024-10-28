@@ -1,0 +1,48 @@
+<div class="container">
+  <h1>Your Cart</h1>
+
+  <div *ngFor="let item of cartItems" class="mb-3">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>
+          <img
+            [src]="item.image"
+            class="image"
+            style="width: 50px; height: auto"
+          />
+          {{ item.name }}
+          <!-- Remove Icon -->
+          <button mat-icon-button color="warn" (click)="removeItem(item)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </mat-card-title>
+      </mat-card-header>
+
+      <mat-card-content>
+        <p>Price: {{ item.price | currency }}</p>
+        <div class="quantity-controls">
+          <button
+            mat-button  
+            (click)="decreaseQuantity(item)"
+            [disabled]="item.quantity <= 1"
+          >
+            -
+          </button>
+          <span>{{ item.quantity }}</span>
+          <button mat-button (click)="increaseQuantity(item)">+</button>
+        </div>
+        <p>Total: {{ item.quantity * item.price | currency }}</p>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <!-- Total Amount displayed after all products -->
+  <div class="total-amount">
+    <h3>Total Amount: {{ getTotalAmount() | currency }}</h3>
+  </div>
+
+  <!-- Single Checkout Button -->
+  <button (click)="goToCheckout()" class="btn btn-primary mt-4">
+    Continue to Checkout
+  </button>
+</div>

@@ -1,0 +1,153 @@
+<div class="container mt-5">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Signup</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+        <!-- First Name -->
+        <div class="form-group">
+          <mat-form-field appearance="fill">
+            <mat-label>First Name</mat-label>
+            <input matInput formControlName="firstName" required />
+            <!-- <mat-error *ngIf="signupForm.get('firstName')?.hasError('required')">
+                First name is required
+              </mat-error> -->
+            @if(signupForm.get('firstName')?.hasError('required')){
+            <mat-error> First name is required </mat-error>
+            }
+          </mat-form-field>
+        </div>
+
+        <!-- Last Name -->
+        <div class="form-group">
+          <mat-form-field appearance="fill">
+            <mat-label>Last Name</mat-label>
+            <input matInput formControlName="lastName" required />
+            <!-- <mat-error *ngIf="signupForm.get('lastName')?.hasError('required')">
+                Last name is required
+              </mat-error> -->
+            @if(signupForm.get('lastName')?.hasError('required')){
+            <mat-error> First name is required </mat-error>
+            }
+          </mat-form-field>
+        </div>
+
+        <!-- Email -->
+        <div class="form-group">
+          <mat-form-field appearance="fill">
+            <mat-label>Email</mat-label>
+            <input matInput formControlName="email" type="email" required />
+            <mat-error *ngIf="signupForm.get('email')?.hasError('required')">
+              Email is required
+            </mat-error>
+            <mat-error
+              *ngIf="
+                signupForm.get('email')?.hasError('email') &&
+                !signupForm.get('email')?.hasError('required')
+              "
+            >
+              Enter a valid email address
+            </mat-error>
+            <mat-error *ngIf="signupForm.get('email')?.hasError('emailTaken')">
+              This email is already taken
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <!-- Mobile -->
+        <div class="form-group">
+          <mat-form-field appearance="fill">
+            <mat-label>Mobile No</mat-label>
+            <!-- <input matInput formControlName="mobile" type="tel" required /> -->
+            <!-- <input matInput formControlName="mobile" type="tel" required /> -->
+            <input
+            matInput
+            formControlName="mobile"
+            type="tel"
+            required
+            (keypress)="isNumberKey($event)"
+          />
+            <mat-error *ngIf="signupForm.get('mobile')?.hasError('required')">
+              Mobile number is required
+            </mat-error>
+
+            <mat-error
+              *ngIf="signupForm.get('mobile')?.hasError('mobileTaken')"
+            >
+              This mobile number is already taken
+            </mat-error>
+
+            <mat-error
+              *ngIf="signupForm.get('mobile')?.hasError('invalidMobile')"
+            >
+              Only digits are allowed
+            </mat-error>
+
+            <mat-error
+              *ngIf="
+                signupForm.get('mobile')?.hasError('pattern') &&
+                !signupForm.get('mobile')?.hasError('required')
+              "
+            >
+              Enter a valid mobile number
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <!-- Password -->
+        <div class="form-group">
+          <mat-form-field appearance="fill">
+            <mat-label>Password</mat-label>
+            <input
+              matInput
+              formControlName="password"
+              type="password"
+              required
+            />
+            <!-- <mat-error *ngIf="signupForm.get('password')?.hasError('required')">
+                Password is required
+              </mat-error> -->
+            @if(signupForm.get('password')?.hasError('required')){
+            <mat-error> password is required </mat-error>
+            } @if(signupForm.get('password')?.hasError('minlength')){
+            <mat-error> Password must be at least 8 characters long </mat-error>
+            }
+          </mat-form-field>
+        </div>
+
+        <!-- Role -->
+        <div class="form-group">
+          <mat-form-field appearance="fill">
+            <mat-label>Role</mat-label>
+            <mat-select formControlName="role" required>
+              <mat-option value="User">User</mat-option>
+              <mat-option value="Admin">Admin</mat-option>
+            </mat-select>
+            <!-- <mat-error *ngIf="signupForm.get('role')?.hasError('required')">
+                Role is required
+              </mat-error> -->
+            @if(signupForm.get('role')?.hasError('required')){
+            <mat-error> Role is required </mat-error>
+            }
+          </mat-form-field>
+        </div>
+
+        <!-- Buttons -->
+        <!-- <button mat-raised-button color="primary" type="submit">Signup</button>
+          <button type="button" mat-raised-button (click)="loginpage()">Login</button> -->
+        <button mat-raised-button class="signup-btn" type="submit">
+          Signup
+        </button>
+        <button
+          type="button"
+          mat-raised-button
+          class="login-btn"
+          (click)="loginpage()"
+        >
+          Login
+        </button>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>
